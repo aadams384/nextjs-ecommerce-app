@@ -15,7 +15,7 @@ export default function Wrapper({ title, children }) {
         <header>
           <nav className="flex h-16 items-center justify-between shadow-md px-4">
             <Link href="/">
-              <text className="text-3xl font-bold">home.</text>
+              <p className="text-3xl font-bold">home.</p>
             </Link>
             <div className="flex">
               <Link href="/cart">
@@ -28,7 +28,7 @@ export default function Wrapper({ title, children }) {
           </nav>
         </header>
         <main className="container m-auto mt-4 px-4">{children}</main>
-        <footer className='flex justify-center items-center'>footer</footer>
+        <footer className="flex justify-center items-center">footer</footer>
       </div>
     </>
   );
