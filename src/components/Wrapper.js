@@ -1,9 +1,8 @@
 'use client';
-
 import React, { useReducer, useContext } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Store } from '../../utils/Store';
+import { Store, StoreProvider } from '../../utils/Store';
 
 export default function Wrapper({ title, children }) {
   const { state, dispatch } = useContext(Store);

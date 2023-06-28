@@ -1,14 +1,14 @@
+'use client';
 import Wrapper from 'src/components/Wrapper';
 import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
 import data from '../../../utils/data';
 import '../../app/globals.css';
-import { handleClientScriptLoad } from 'next/script';
 import capitalizeFirstLetter from '../../../utils/capitalize';
 import { Store } from '../../../utils/Store';
 
 export default function ProductPage() {
-  const { state, dispatch } = React.useContext(Store);
+  const { state, dispatch } = useContext(Store);
   const { cart } = state;
 
   const { query } = useRouter();
@@ -25,7 +25,7 @@ export default function ProductPage() {
   }
 
   const handleAddToCart = () => {
-    const itemExists = cart.cartItems.find(
+    const itemExists = state.cart.cartItems.find(
       (item) => item.slug === product.slug
     );
     const quantity = itemExists ? itemExists.quantity + 1 : 1;
