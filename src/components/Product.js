@@ -9,15 +9,15 @@ export default function Product({ product }) {
           <img src={product.image} alt={product.name} className="shadow-md" />
         </a>
       </Link>
-      <div className="flex flex-col items-left justify-center p-5">
+      <div className="flex flex-col items-left justify-center p-5 bottom-card">
         <Link legacyBehavior href={`/product/${product.slug}`}>
           <a>
-            <h2 className="text-xs ">{product.name}</h2>
+            <h2 className="text-xs">{product.name}</h2>
           </a>
         </Link>
         <p className="text-sm font-bold">${product.price}</p>
         <button type="button" className="primary-button">
-          <p>Add to Cart</p>
+          <p>add to cart</p>
         </button>
       </div>
     </div>
