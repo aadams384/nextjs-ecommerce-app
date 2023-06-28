@@ -1,5 +1,4 @@
-'use client';
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Store, StoreProvider } from '../../utils/Store';
@@ -7,6 +6,10 @@ import { Store, StoreProvider } from '../../utils/Store';
 export default function Wrapper({ title, children }) {
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  useEffect(() => {
+    setCartItemsCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
+  }, [cart.cartItems]);
 
   return (
     <>
@@ -42,14 +45,14 @@ export default function Wrapper({ title, children }) {
               <Link href="/cart">
                 <p className="md:px-2 hidden md:flex text-xs">
                   CART
-                  {cart.cartItems.length > 0 && (
-                    <span className="text-xs text-white bg-black rounded-full px-1">
-                      {cart.cartItems.reduce((a, x) => a + x.quantity, 0)}
+                  {cartItemsCount > 0 && (
+                    <span className=" relative-flex text-xs text-white bg-black rounded-full px-1">
+                      {cartItemsCount}
                     </span>
                   )}
                 </p>
               </Link>
-              <Link href="/checkout">
+              <Link href="/login">
                 <p className="md:px-2 hidden md:flex text-xs">LOGIN</p>
               </Link>
             </div>
