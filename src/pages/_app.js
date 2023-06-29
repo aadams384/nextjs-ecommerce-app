@@ -1,12 +1,18 @@
 'use client';
 import React from 'react';
+import { SessionProvider } from 'next-auth/react';
 import { StoreProvider } from '../../utils/Store';
 import '../app/globals.css';
 
-export default function App({ Component, pageProps }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-    <StoreProvider>
-      <Component {...pageProps} />
-    </StoreProvider>
+    <SessionProvider session={session}>
+      <StoreProvider>
+        <Component {...pageProps} />
+      </StoreProvider>
+    </SessionProvider>
   );
 }

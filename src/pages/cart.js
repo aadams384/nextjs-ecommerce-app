@@ -6,8 +6,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+import { useSession } from 'next-auth/react';
 
 function CartPage() {
+  const { status, data: session } = useSession();
+
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
 
@@ -113,7 +116,11 @@ function CartPage() {
                 <li>
                   <button
                     className="primary-button w-full"
-                    onClick={() => router.push('login?redirect=/checkout')}
+                    onClick={() =>
+                      session?.user
+                        ? router.push('/checkout')
+                        : router.push('login?redirect=/checkout')
+                    }
                   >
                     Proceed to Checkout
                   </button>

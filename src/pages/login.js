@@ -1,16 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Wrapper from '../components/Wrapper';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import getError from '../../utils/error';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 export default function LoginPage() {
+  const { data: session } = useSession();
+
+  const router = useRouter();
+  const { redirect } = router.query;
+
+  useEffect(() => {
+    if (session?.user) {
+      router.push(redirect || '/');
+    }
+  }, [router, redirect, session]);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const submitHandler = ({ email, password }) => {
+  const submitHandler = async ({ email, password }) => {
+    try {
+      const repsonse = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+      console.log(repsonse);
+      if (repsonse?.error) {
+        toast.error(getError(repsonse.error));
+      }
+    } catch (error) {
+      toast.error(getError(error));
+    }
   };
 
   return (
@@ -70,7 +98,7 @@ export default function LoginPage() {
         <div>
           still need an account?{' '}
           <Link legacyBehavior href="/register">
-            <a className="text-blue-500">register</a>
+            <a className="text-purple-500">register</a>
           </Link>
         </div>
       </form>
