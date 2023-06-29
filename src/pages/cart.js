@@ -118,8 +118,8 @@ function CartPage() {
                     className="primary-button w-full"
                     onClick={() =>
                       session?.user
-                        ? router.push('/checkout')
-                        : router.push('login?redirect=/checkout')
+                        ? router.push('/shipping')
+                        : router.push('login?redirect=/shipping')
                     }
                   >
                     Proceed to Checkout
