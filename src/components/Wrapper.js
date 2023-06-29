@@ -73,7 +73,7 @@ export default function Wrapper({ title, children }) {
               ) : session?.user ? (
                 <Menu className="relative flex items-center" as="div">
                   <Menu.Button className="primary-button hidden md:inline-block border rounded-full">
-                    <span>{session.user.name.charAt(0)}</span>
+                    <span>{session.user.name.charAt(0).toUpperCase()}</span>
                   </Menu.Button>
                   <Menu.Items className="absolute right-2 top-16 w-32 origin-top-right shadow-lg border-2 rounded bg-white">
                     <Menu.Item>

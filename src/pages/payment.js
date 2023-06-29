@@ -44,20 +44,27 @@ export default function Payment() {
       <form className="mx-auto max-w-screen-md" onSubmit={submitHandler}>
         <h1 className="mb-4 text-xl font-bold text-center">payment method</h1>
         {['Paypal', 'Credit/Debit Card'].map((method) => (
-          <div key={method} className="grid place-items-center">
+          <div key={method} className="grid place-items-center flex">
             <input
               type="radio"
               id={method}
               value={method}
               name="paymentMethod"
               required
-              className="p-2 outline-none, focus:ring-purple-500 sr-only peer"
+              className="p-2 outline-none, focus:ring-purple-500 sr-only "
               checked={selectedPaymentMethod === method}
               onChange={() => setSelectedPaymentMethod(method)}
             />
-            <label htmlFor={method} onClick={submitHandler}>
+            <label
+              onClick={(e) => {
+                setSelectedPaymentMethod(method);
+                submitHandler(e);
+              }}
+              className="cursor-pointer"
+              for={method}
+            >
               {method === 'Paypal' && (
-                <div class="w-full text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 mr-2 mb-2">
+                <div class="w-full text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 mr-2 mb-2 selected:ring-4">
                   <svg
                     class="mr-2 -ml-1 w-4 h-4"
                     aria-hidden="true"
@@ -102,6 +109,7 @@ export default function Payment() {
           <button
             className="primary-button"
             onClick={() => router.push('/shipping')}
+            type="button"
           >
             previous
           </button>
@@ -110,3 +118,5 @@ export default function Payment() {
     </Wrapper>
   );
 }
+
+Payment.auth = true;

@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import User from '../../../../models/user';
+import User from '../../../../utils/models/user';
 import db from '../../../../utils/db';
 import bcrypt from 'bcryptjs';
 
@@ -23,10 +23,10 @@ export default NextAuth({
   providers: [
     CredentialsProvider({
       name: 'Credentials',
-    //   credentials: {
-    //     email: { label: 'email', type: 'email', placeholder: 'email' },
-    //     password: { label: 'password', type: 'password' },
-    //   },
+      //   credentials: {
+      //     email: { label: 'email', type: 'email', placeholder: 'email' },
+      //     password: { label: 'password', type: 'password' },
+      //   },
       async authorize(credentials, req) {
         await db.connectDB();
         const user = await User.findOne({

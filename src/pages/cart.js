@@ -41,15 +41,16 @@ function CartPage() {
           <div className="grid md:grid-cols-4 md:gap-5">
             <div className="overflow-x-auto md:col-span-3">
               <table className="min-w-full">
-                <thead className="border-b">
-                  <tr className="flex justify-between">
+                <thead className="border-b min-w-full">
+                  <tr className=" w-full justify-between">
                     <th className="p-5 text-left">Item</th>
-                    <th className="p-5 text-right">Quantity</th>
+                    <th className="p-5 text-left">Quantity</th>
                     <th className="p-5 text-right">Price</th>
                   </tr>
+                  </thead>
                   <tbody>
                     {cartItems.map((item) => (
-                      <tr key={item._slug} className="border-b">
+                      <tr key={item._slug} className="w-min-screen">
                         <td>
                           <Link legacyBehavior href={`/product/${item.slug}`}>
                             <a className="flex items-center">
@@ -60,7 +61,7 @@ function CartPage() {
                                 height={100}
                               />
                               &nbsp;
-                              {item.name}
+                              <div className='hidden md:flex'>{item.name}</div>
                             </a>
                           </Link>
                         </td>
@@ -79,7 +80,7 @@ function CartPage() {
                           </select>
                         </td>
                         <td className="px-5 text-right">
-                          {item.price * item.quantity}
+                          ${item.price * item.quantity}
                         </td>
                         <td className="p-5 text-center">
                           <button
@@ -102,7 +103,6 @@ function CartPage() {
                       </tr>
                     ))}
                   </tbody>
-                </thead>
               </table>
             </div>
             <div className="card p-5">

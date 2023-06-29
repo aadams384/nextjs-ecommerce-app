@@ -32,7 +32,6 @@ export default function LoginPage() {
         email,
         password,
       });
-      console.log(repsonse);
       if (repsonse?.error) {
         toast.error(getError(repsonse.error));
       }
@@ -84,7 +83,6 @@ export default function LoginPage() {
             id="password"
             placeholder="password"
             className="w-full"
-            autoFocus
           />
           {errors.password && (
             <div className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
@@ -97,7 +95,7 @@ export default function LoginPage() {
         </div>
         <div>
           still need an account?{' '}
-          <Link legacyBehavior href="/register">
+          <Link legacyBehavior href={`/register?redirect=${redirect || '/'}`}>
             <a className="text-purple-500">register</a>
           </Link>
         </div>
