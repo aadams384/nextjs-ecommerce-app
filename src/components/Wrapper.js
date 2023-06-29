@@ -42,11 +42,28 @@ export default function Wrapper({ title, children }) {
                 <p className="text-xs hidden md:flex px-2">SHOP</p>
               </Link>
             </div>
-            <div className="w-full md:hidden p-0">
-              <button className="primary-button border gray-800 rounded px-0 py-0 text-center mr-0 mb-0 my-0">
+            <Menu as="div" className="w-full md:hidden p-0">
+              <Menu.Button className="primary-button border gray-800 rounded px-0 py-0 text-center mr-0 mb-0 my-0">
                 ☰
-              </button>
-            </div>
+              </Menu.Button>
+              <Menu.Items className="absolute left-2 top-16 w-32 origin-top-right shadow-lg border-2 rounded bg-white">
+                <Menu.Item>
+                  <a className="dropdown-link" href="/">
+                    shop
+                  </a>
+                </Menu.Item>
+                <Menu.Item>
+                  <a className="dropdown-link" href="/cart">
+                    cart
+                  </a>
+                </Menu.Item>
+                <Menu.Item>
+                  <a className="dropdown-link" href="/login">
+                    login
+                  </a>
+                </Menu.Item>
+              </Menu.Items>
+            </Menu>
             <div className="w-full md:w-1/3 text-center">
               <Link href="/">
                 <p className="text-xs md:text-3xl font-bold">
@@ -76,16 +93,6 @@ export default function Wrapper({ title, children }) {
                     <span>{session.user.name.charAt(0).toUpperCase()}</span>
                   </Menu.Button>
                   <Menu.Items className="absolute right-2 top-16 w-32 origin-top-right shadow-lg border-2 rounded bg-white">
-                    <Menu.Item>
-                      <DropdownLink className="dropdown-link" href="/profile">
-                        profile
-                      </DropdownLink>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <DropdownLink className="dropdown-link" href="/orders">
-                        orders
-                      </DropdownLink>
-                    </Menu.Item>
                     <Menu.Item>
                       <a
                         className="dropdown-link"
